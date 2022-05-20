@@ -1,0 +1,82 @@
+<header>
+  <h1>VIA CEP</h1>
+</header>
+
+<main>
+
+  <section id="buscar-cep">
+    <form>
+      <div class="input-group">
+        <label for="cep">CEP</label>
+        <input type="text" name="cep" id="cep" [(ngModel)]="cep">
+      </div>
+      <div class="input-group">
+        <button type="button" (click)="getEndereco()">Pesquisar</button>
+      </div>
+    </form>
+
+    <ul>
+      <li *ngIf="endereco">
+        <address>
+          {{ endereco.logradouro }}, {{ endereco.complemento }} - {{ endereco.bairro }}
+        </address>
+      </li>
+    </ul>
+
+  </section>
+
+  <section id="buscar-endereco">
+    <div>
+      <form>
+
+        <div class="input-group">
+
+          <label for="uf">UF</label>
+          <select name="uf" id="uf" [(ngModel)]="uf">
+            <option *ngFor="let e of estados;" value="{{ e.sigla }}">{{ e.nome }}</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="cidade">Cidade: </label>
+          <input type="text" name="cidade" id="cidade" [(ngModel)]="nomeDaCidade">
+        </div>
+
+        <div class="input-group">
+          <label for="logradouro">Logradouro: </label>
+          <input type="text" name="logradouro" id="logradouro" [(ngModel)]="logradouro">
+        </div>
+
+        <div class="input-group">
+          <button type="button" (click)="getEnderecos()">Pesquisar</button>
+        </div>
+
+      </form>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>CEP</th>
+            <th>Logradouro</th>
+            <th>Complemento</th>
+            <th>Bairro</th>
+            <th>Localidade</th>
+          </tr>
+        </thead>
+        <tbody>  
+          <tr *ngFor="let endereco of enderecos; let i = index">
+            <td>{{ ( i + 1 ) }}</td>
+            <td>{{ endereco.cep }}</td>
+            <td>{{ endereco.logradouro }}</td>
+            <td>{{ endereco.complemento }}</td>
+            <td>{{ endereco.bairro }}</td>
+            <td>{{ endereco.localidade }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
